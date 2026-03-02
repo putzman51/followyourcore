@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follow Your Core</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mango: #F5A623;
+    --mango-light: #FDE8C0;
+    --mango-pale: #FEF7ED;
+    --mango-deep: #D4891A;
+    --terra: #C4714A;
+    --cream: #FDFAF5;
+    --stone: #9A8B7D;
+    --dark: #352A22;
+    --text: #4A3D35;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  header {
+    padding: 44px 0 30px;
+    border-bottom: 1px solid var(--mango-light);
+    margin-bottom: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .logo { text-decoration: none; cursor: pointer; }
+  .logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mango-deep);
+    display: block;
+    letter-spacing: 0.03em;
+  }
+  .logo-tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--mango-deep);
+    display: block;
+    margin-top: 4px;
+  }
+  nav { display: flex; gap: 22px; padding-bottom: 2px; }
+  nav a {
+    text-decoration: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--stone);
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  nav a:hover { color: var(--terra); }
+  .view { display: none; }
+  .view.active { display: block; animation: fadeUp 0.4s ease both; }
+  .section-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mango-deep);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--mango-light);
+  }
+  .newest-post { margin-bottom: 60px; }
+  .post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--mango-pale);
+    border: 1px solid var(--mango-light);
+    color: var(--terra);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .date { font-size: 0.68rem; color: var(--stone); }
+  .newest-post h1 {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(2rem, 6.5vw, 2.6rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.18;
+    color: var(--mango-deep);
+    text-transform: lowercase;
+  }
+  .newest-post p {
+    font-size: 0.92rem;
+    color: var(--text);
+    margin-bottom: 32px;
+    line-height: 1.85;
+  }
+  .read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dark);
+    font-weight: 400;
+    border-bottom: 1.5px solid var(--mango);
+    padding-bottom: 2px;
+    transition: gap 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .read-link:hover { gap: 14px; border-color: var(--terra); }
+  .read-link::after { content: '→'; font-size: 0.82rem; }
+  .archive { margin-bottom: 80px; }
+  .post-row {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--mango-light);
+    cursor: pointer;
+  }
+  .post-row:first-of-type { border-top: 1px solid var(--mango-light); }
+  .post-row:hover .row-title { color: var(--terra); }
+  .row-date { font-size: 0.65rem; color: var(--stone); padding-top: 4px; line-height: 1.5; }
+  .row-date span { display: block; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+  .row-tag { font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mango-deep); margin-bottom: 5px; }
+  .row-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
+  .post-header { margin-bottom: 44px; }
+  .post-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 7vw, 2.9rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 18px;
+  }
+  .post-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--stone);
+    line-height: 1.85;
+    border-left: 2px solid var(--mango);
+    padding-left: 18px;
+  }
+  .duration-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 36px 0 44px;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .duration-row::before, .duration-row::after { content: ''; flex: 1; height: 1px; background: var(--mango-light); }
+  .exercises { margin-bottom: 72px; }
+  .exercise { padding: 32px 0; border-bottom: 1px solid var(--mango-light); }
+  .exercise:first-child { border-top: 1px solid var(--mango-light); }
+  .ex-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; }
+  .ex-num { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 300; color: var(--mango); min-width: 22px; }
+  .ex-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--dark); line-height: 1.2; }
+  .ex-time { margin-left: auto; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mango-deep); background: var(--mango-pale); border: 1px solid var(--mango-light); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .ex-cues { list-style: none; display: flex; flex-direction: column; gap: 7px; padding-left: 36px; }
+  .ex-cues li {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.7;
+    position: relative;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 3px 6px 3px 0;
+    transition: background 0.15s, color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .ex-cues li::before { content: '·'; position: absolute; left: -14px; color: var(--mango); }
+  .ex-cues li.breath {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.97rem;
+    font-style: italic;
+    color: var(--terra);
+    background: var(--mango-pale);
+    border-left: 2px solid var(--mango);
+    padding: 6px 12px 6px 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 4px 0;
+  }
+  .ex-cues li.breath::before { display: none; }
+  .ex-cues li.active {
+    background: var(--mango) !important;
+    color: white !important;
+    border-color: var(--mango-deep) !important;
+    padding: 6px 12px 6px 14px !important;
+    border-radius: 6px;
+    font-style: normal !important;
+  }
+  .ex-cues li.active::before { color: rgba(255,255,255,0.4); }
+  footer { padding: 28px 0 52px; border-top: 1px solid var(--mango-light); display: flex; justify-content: space-between; align-items: center; }
+  .back-link { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone); display: flex; align-items: center; gap: 8px; transition: color 0.2s, gap 0.2s; cursor: pointer; }
+  .back-link::before { content: '←'; font-size: 0.82rem; }
+  .back-link:hover { color: var(--terra); gap: 12px; }
+  .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--mango-deep); font-weight: 300; font-style: italic; }
+  .footer-copy { font-size: 0.6rem; color: var(--mango-deep); letter-spacing: 0.1em; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  header { animation: fadeUp 0.5s ease both; }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" onclick="showHome()">
+    <span class="logo-name">follow your core</span>
+    <span class="logo-tag">mindful movements</span>
+  </a>
+  <nav>
+    <a onclick="showHome(); setTimeout(()=>document.getElementById('archive').scrollIntoView({behavior:'smooth'}),50)">Archive</a>
+    <a onclick="showView('about')">About</a>
+  </nav>
+</header>
+<div id="view-home" class="view active">
+  <section class="newest-post">
+    <p class="section-label">Latest</p>
+    <div class="post-meta">
+      <span class="tag">Mat Work</span>
+      <span class="date">March 2, 2026</span>
+    </div>
+    <h1>Simple Floor Routine</h1>
+    <p>Put on a soft playlist and enjoy each movement thoroughly. Expand with each breath and savor each movement. Relax into the mat.</p>
+    <span class="read-link" onclick="showPost('simple-floor')">Read</span>
+  </section>
+  <section class="archive" id="archive">
+    <p class="section-label">All Posts</p>
+    <div class="post-row" onclick="showPost('simple-floor')">
+      <div class="row-date">Mar 2<span>2026</span></div>
+      <div><div class="row-tag">Mat Work</div><div class="row-title">Simple Floor Routine</div></div>
+    </div>
+
+  </section>
+  <footer>
+    <div class="footer-name">follow your core</div>
+    <div class="footer-copy">followyourcore.com</div>
+  </footer>
+</div>
+<div id="view-simple-floor" class="view">
+  <div class="post-header">
+    <div class="post-meta">
+      <span class="tag">Mat Work</span>
+      <span class="date">March 2, 2026</span>
+    </div>
+    <h1>Simple Floor Routine</h1>
+    <p class="post-intro">Put on a soft playlist and enjoy each movement thoroughly. Expand with each breath and savor each movement. Relax into the mat.</p>
+  </div>
+  <div class="duration-row">14 exercises about 45 minutes</div>
+  <section class="exercises">
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">01</span><span class="ex-title">Breathing and Centering</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Lay on your back, knees bent, feet flat.</li>
+        <li>Place fingers along the center of your abdominals.</li>
+        <li>Use your fingers to help you find the center of your core.</li>
+        <li class="breath">Inhale - pull your center toward your spine as deeply as possible.</li>
+        <li class="breath">Exhale - pull your center toward your spine a little more.</li>
+        <li>Repeat 10 times. Concentrate. Center yourself.</li>
+        <li>Carry this breath technique through all the exercises.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">02</span><span class="ex-title">100 Breathing - Head Down</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Neutral spine. Belly flat. Feet down.</li>
+        <li>Keep arms strong and glued to the sides of your shoulder blades.</li>
+        <li class="breath">Inhale for 5 sniffs. Exhale for 5 blows.</li>
+        <li>Vigorously pump straight arms while keeping spine, rib cage, and head still.</li>
+        <li>Breathe rhythmically and consistently.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">03</span><span class="ex-title">100 Breathing - Shoulder Blades Up</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Collar bones square. Arms glued to sides of shoulder blades.</li>
+        <li>Lift your shoulder blades off the mat. Arms straight and stretched tight, fingers together.</li>
+        <li class="breath">Inhale for 5 sniffs. Exhale for 5 blows.</li>
+        <li>Pump your arms controlled and vigorous. Repeat 3-10 times.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">04</span><span class="ex-title">Single Leg Stretch</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Stretch out long with straight legs. Curl head and chest up.</li>
+        <li>Keep rib cage and pelvis stable.</li>
+        <li class="breath">Exhale - bend right leg and pull thigh into low belly. Lift left leg a few inches off the floor.</li>
+        <li class="breath">Inhale - bend left leg in, stretch right leg a few inches from the floor.</li>
+        <li>Breathe and switch legs at the same rate. Do 10 sets.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">05</span><span class="ex-title">Double Leg Stretch</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Stretch out long with straight legs. Curl head and chest up.</li>
+        <li class="breath">Inhale - lift both legs and reach both arms up toward the ceiling.</li>
+        <li class="breath">Exhale - bend legs and pull them into a little ball with your arms.</li>
+        <li>Keep head and chest curled up. Abdominals tight against spine. Repeat 6-10 times.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">06</span><span class="ex-title">Clam Shell</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Lay on your side with bent legs stacked. Spine straight and long.</li>
+        <li>Prop head up on elbow or forearm. Other hand on center of abdominals.</li>
+        <li class="breath">Inhale - pull abdominals in. Keep feet together at the toes.</li>
+        <li class="breath">Exhale - lift top leg off bottom leg and hold 3 seconds.</li>
+        <li>Repeat 10-20 times. Do the other side.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">07</span><span class="ex-title">Side Leg Kicks</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Lay on your side in a banana shape. Feet in Pilates V with bottom toes curled under.</li>
+        <li>Kick top leg at hip height.</li>
+        <li>10x Forward and Backward, 10x Up and Down, 5 Circles each direction.</li>
+        <li>Repeat on other side.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">08</span><span class="ex-title">Roll Up</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Stretch out long with straight legs. Arms glued to sides of shoulder blades.</li>
+        <li class="breath">Inhale - reach arms overhead.</li>
+        <li class="breath">Exhale - sweep arms up and over like a rainbow. Keep collar bones square.</li>
+        <li>Hover hands close to legs and sit up one vertebra at a time. Fold in half and reach past your feet.</li>
+        <li>Pelvic curl to initiate rolling back to start. Repeat 10 times.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">09</span><span class="ex-title">Kneeling Plank Push-Ups</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Kneel in all fours. Hands shoulder-width apart. One line from head to knees.</li>
+        <li>Arms glued to the sides of shoulder blades. Collar bones square.</li>
+        <li class="breath">Inhale - bend elbows to 90 degrees.</li>
+        <li class="breath">Exhale - straighten arms.</li>
+        <li>Repeat 10 times.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">10</span><span class="ex-title">Forearm Plank</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>From all fours, come down to forearms.</li>
+        <li>Move one leg at a time into plank, keeping head and spine stable.</li>
+        <li class="breath">Use your breath to maintain a stable spine.</li>
+        <li>Do 10-15 controlled breath cycles.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">11</span><span class="ex-title">Glute Bridges</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Lay on your back with legs bent, feet flat. Position feet so you can touch your fingers to your heels.</li>
+        <li>Flatten your abdominals. Do a pelvic curl to lift pelvis as high as possible.</li>
+        <li>Push feet into the floor. Lift glutes higher and hold 3 seconds. Return to start.</li>
+        <li>Repeat 10-15 times. Keep abdominals pulled inward to prevent the dreaded hamstring cramp.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">12</span><span class="ex-title">Windshield Wipers</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Lay on the floor with legs bent. Separate feet as wide as the mat.</li>
+        <li>Open arms to a T shape, palms up.</li>
+        <li>Move legs from hip joints and sway knees side to side. Massage your hips across the mat.</li>
+        <li>Look right when knees sway left. Look left when knees sway right.</li>
+        <li class="breath">Breathe and relax as you move.</li>
+        <li>Do 5 or more sets.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">13</span><span class="ex-title">Runner's Lunge with Side Bend</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>From all fours, step right foot forward into Runner's Lunge.</li>
+        <li>Left leg long and extended back at the front hip joint.</li>
+        <li>Reach left arm up and side bend over to the right. Place right hand on right thigh to stabilize.</li>
+        <li>Stretch the entire left side of your body.</li>
+        <li class="breath">Breathe long and slow.</li>
+        <li>Do the other side.</li>
+      </ul>
+    </div>
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">14</span><span class="ex-title">Butterfly Stretch</span><span class="ex-time">3-4 min</span></div>
+      <ul class="ex-cues">
+        <li>Lay on the floor. Place the bottoms of your feet together.</li>
+        <li>Open your knees to the side like butterfly wings.</li>
+        <li class="breath">Breathe slowly and flow into a relaxed state.</li>
+      </ul>
+    </div>
+  </section>
+  <footer>
+    <span class="back-link" onclick="showHome()">All Posts</span>
+    <div class="footer-name">follow your core</div>
+  </footer>
+</div>
+<div id="view-about" class="view">
+  <div class="post-header">
+    <h1>About</h1>
+    <p class="post-intro">Breath and movement are an essential part of life. Let's enjoy them together. Please use these ideas however you feel will benefit yourself and others.</p>
+  </div>
+  <footer>
+    <span class="back-link" onclick="showHome()">Home</span>
+    <div class="footer-name">follow your core</div>
+  </footer>
+</div>
+
+<script>
+  function showHome() { showView('home'); }
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function showPost(id) { showView(id); }
+  document.querySelectorAll('.ex-cues li').forEach(li => {
+    li.addEventListener('click', () => {
+      const wasActive = li.classList.contains('active');
+      li.closest('ul').querySelectorAll('li').forEach(el => el.classList.remove('active'));
+      if (!wasActive) li.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
