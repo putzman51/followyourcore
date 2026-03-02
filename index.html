@@ -85,7 +85,8 @@
     height: 1px;
     background: var(--mango-light);
   }
-  .newest-post { margin-bottom: 60px; }
+  .newest-post { margin-bottom: 60px; cursor: pointer; }
+  .newest-post:hover h1 { color: var(--terra); transition: color 0.2s; }
   .post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
   .tag {
     font-size: 0.58rem;
@@ -238,7 +239,7 @@
   </nav>
 </header>
 <div id="view-home" class="view active">
-  <section class="newest-post">
+  <section class="newest-post" onclick="showPost('simple-floor')">
     <p class="section-label">Latest</p>
     <div class="post-meta">
       <span class="tag">Mat Work</span>
@@ -246,7 +247,6 @@
     </div>
     <h1>Simple Floor Routine</h1>
     <p>Put on a soft playlist and enjoy each movement thoroughly. Expand with each breath and savor each movement. Relax into the mat.</p>
-    <span class="read-link" onclick="showPost('simple-floor')">Read</span>
   </section>
   <section class="archive" id="archive">
     <p class="section-label">All Posts</p>
