@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Follow Your Core</title>
+<link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --mango: #F5A623;
@@ -48,14 +49,6 @@
     display: block;
     letter-spacing: 0.03em;
   }
-  .logo-tag {
-    font-size: 0.58rem;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--mango-deep);
-    display: block;
-    margin-top: 4px;
-  }
   nav { display: flex; gap: 22px; padding-bottom: 2px; }
   nav a {
     text-decoration: none;
@@ -67,46 +60,23 @@
     cursor: pointer;
   }
   nav a:hover { color: var(--terra); }
+
   .view { display: none; }
   .view.active { display: block; animation: fadeUp 0.4s ease both; }
-  .section-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--mango-deep);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--mango-light);
-  }
-  .newest-post { margin-bottom: 60px; cursor: pointer; }
-  .newest-post:hover h1 { color: var(--terra); transition: color 0.2s; }
-  .post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-  .tag {
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    background: var(--mango-pale);
-    border: 1px solid var(--mango-light);
-    color: var(--terra);
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-  .date { font-size: 0.68rem; color: var(--stone); }
+
+  /* ——— HOME ——— */
+  .newest-post { margin-bottom: 60px; }
+  .post-date { font-size: 0.68rem; color: var(--stone); margin-bottom: 14px; }
+
   .newest-post h1 {
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Source Serif 4', serif;
     font-size: clamp(2rem, 6.5vw, 2.6rem);
-    font-weight: 400;
+    font-weight: 300;
     font-style: italic;
     line-height: 1.18;
     color: var(--mango-deep);
     text-transform: lowercase;
+    margin-bottom: 26px;
   }
   .newest-post p {
     font-size: 0.92rem;
@@ -114,37 +84,30 @@
     margin-bottom: 32px;
     line-height: 1.85;
   }
-  .read-link {
+
+  /* GO button */
+  .go-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.68rem;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--mango);
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--dark);
-    font-weight: 400;
-    border-bottom: 1.5px solid var(--mango);
-    padding-bottom: 2px;
-    transition: gap 0.2s, border-color 0.2s;
     cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
   }
-  .read-link:hover { gap: 14px; border-color: var(--terra); }
-  .read-link::after { content: '→'; font-size: 0.82rem; }
-  .archive { margin-bottom: 80px; }
-  .post-row {
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 0 18px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--mango-light);
-    cursor: pointer;
-  }
-  .post-row:first-of-type { border-top: 1px solid var(--mango-light); }
-  .post-row:hover .row-title { color: var(--terra); }
-  .row-date { font-size: 0.65rem; color: var(--stone); padding-top: 4px; line-height: 1.5; }
-  .row-date span { display: block; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
-  .row-tag { font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mango-deep); margin-bottom: 5px; }
-  .row-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
+  .go-btn:hover { background: var(--mango-deep); transform: scale(1.06); }
+
+  /* ——— POST VIEW ——— */
   .post-header { margin-bottom: 44px; }
   .post-header h1 {
     font-family: 'Cormorant Garamond', serif;
@@ -164,6 +127,8 @@
     border-left: 2px solid var(--mango);
     padding-left: 18px;
   }
+  .post-meta-small { font-size: 0.68rem; color: var(--stone); margin-bottom: 14px; }
+
   .duration-row {
     display: flex;
     align-items: center;
@@ -175,6 +140,8 @@
     color: var(--stone);
   }
   .duration-row::before, .duration-row::after { content: ''; flex: 1; height: 1px; background: var(--mango-light); }
+
+  /* ——— EXERCISES ——— */
   .exercises { margin-bottom: 72px; }
   .exercise { padding: 32px 0; border-bottom: 1px solid var(--mango-light); }
   .exercise:first-child { border-top: 1px solid var(--mango-light); }
@@ -217,56 +184,128 @@
     font-style: normal !important;
   }
   .ex-cues li.active::before { color: rgba(255,255,255,0.4); }
+
+  /* ——— EMAIL VIEW ——— */
+  .email-view { padding-bottom: 72px; }
+  .email-view h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    font-weight: 300;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .email-view p {
+    font-size: 0.9rem;
+    color: var(--stone);
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+  .email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .email-form input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid var(--mango-light);
+    border-radius: 40px;
+    background: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .email-form input:focus { border-color: var(--mango); }
+  .email-form input::placeholder { color: var(--stone); }
+  .email-form button {
+    align-self: flex-start;
+    background: var(--mango);
+    border: none;
+    padding: 13px 32px;
+    border-radius: 40px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    font-weight: 400;
+    transition: background 0.2s;
+  }
+  .email-form button:hover { background: var(--mango-deep); }
+  .email-success {
+    display: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--terra);
+    margin-top: 20px;
+  }
+
+  /* ——— FOOTER ——— */
   footer { padding: 28px 0 52px; border-top: 1px solid var(--mango-light); display: flex; justify-content: space-between; align-items: center; }
   .back-link { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone); display: flex; align-items: center; gap: 8px; transition: color 0.2s, gap 0.2s; cursor: pointer; }
   .back-link::before { content: '←'; font-size: 0.82rem; }
   .back-link:hover { color: var(--terra); gap: 12px; }
   .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--mango-deep); font-weight: 300; font-style: italic; }
   .footer-copy { font-size: 0.6rem; color: var(--mango-deep); letter-spacing: 0.1em; }
+
+  /* ——— ARCHIVE ——— */
+  .archive-list { margin-bottom: 72px; }
+  .post-row {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--mango-light);
+    cursor: pointer;
+  }
+  .post-row:first-of-type { border-top: 1px solid var(--mango-light); }
+  .post-row:hover .row-title { color: var(--terra); }
+  .row-date { font-size: 0.65rem; color: var(--stone); padding-top: 4px; line-height: 1.5; }
+  .row-date span { display: block; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+  .row-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
+
   @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   header { animation: fadeUp 0.5s ease both; }
 </style>
 </head>
 <body>
+
 <header>
   <a class="logo" onclick="showHome()">
     <span class="logo-name">follow your core</span>
-    <span class="logo-tag">mindful movements</span>
   </a>
   <nav>
-    <a onclick="showHome(); setTimeout(()=>document.getElementById('archive').scrollIntoView({behavior:'smooth'}),50)">Archive</a>
+    <a onclick="showView('archive')">Archive</a>
+    <a onclick="showView('email')">Newsletter</a>
     <a onclick="showView('about')">About</a>
   </nav>
 </header>
-<div id="view-home" class="view active">
-  <section class="newest-post" onclick="showPost('simple-floor')">
-    <p class="section-label">Latest</p>
-    <div class="post-meta">
-      <span class="tag">Mat Work</span>
-      <span class="date">March 2, 2026</span>
-    </div>
-    <h1>Simple Floor Routine</h1>
-    <p>Put on a soft playlist and enjoy each movement thoroughly. Expand with each breath and savor each movement. Relax into the mat.</p>
-  </section>
-  <section class="archive" id="archive">
-    <p class="section-label">All Posts</p>
-    <div class="post-row" onclick="showPost('simple-floor')">
-      <div class="row-date">Mar 2<span>2026</span></div>
-      <div><div class="row-tag">Mat Work</div><div class="row-title">Simple Floor Routine</div></div>
-    </div>
 
+
+<!-- ════ HOME ════ -->
+<div id="view-home" class="view active">
+  <section class="newest-post">
+    <p class="post-date">March 2, 2026</p>
+    <h1>Simple Floor Routine</h1>
+    <p>Put on a soft playlist. Expand with each breath and savor each movement. Relax into the mat.</p>
+    <button class="go-btn" onclick="goToPost('simple-floor')">go</button>
   </section>
   <footer>
     <div class="footer-name">follow your core</div>
     <div class="footer-copy">followyourcore.com</div>
   </footer>
 </div>
+
+
+<!-- ════ POST: SIMPLE FLOOR ROUTINE ════ -->
 <div id="view-simple-floor" class="view">
   <div class="post-header">
-    <div class="post-meta">
-      <span class="tag">Mat Work</span>
-      <span class="date">March 2, 2026</span>
-    </div>
+    <p class="post-meta-small">March 2, 2026</p>
     <h1>Simple Floor Routine</h1>
     <p class="post-intro">Put on a soft playlist and enjoy each movement thoroughly. Expand with each breath and savor each movement. Relax into the mat.</p>
   </div>
@@ -415,6 +454,24 @@
     <div class="footer-name">follow your core</div>
   </footer>
 </div>
+
+
+<!-- ════ ARCHIVE ════ -->
+<div id="view-archive" class="view">
+  <div class="archive-list">
+    <div class="post-row" onclick="goToPost('simple-floor')">
+      <div class="row-date">Mar 2<span>2026</span></div>
+      <div class="row-title">Simple Floor Routine</div>
+    </div>
+  </div>
+  <footer>
+    <span class="back-link" onclick="showHome()">Home</span>
+    <div class="footer-name">follow your core</div>
+  </footer>
+</div>
+
+
+<!-- ════ ABOUT ════ -->
 <div id="view-about" class="view">
   <div class="post-header">
     <h1>About</h1>
@@ -426,14 +483,58 @@
   </footer>
 </div>
 
+
+<!-- ════ EMAIL / NEWSLETTER ════ -->
+<div id="view-email" class="view">
+  <div class="email-view">
+    <h1>Let's move together</h1>
+    <p>You are the reason I keep writing. Signing up keeps you in my loop.</p>
+    <div class="email-form">
+      <input type="email" id="email-input" placeholder="your@email.com">
+      <button onclick="submitEmail()">Join</button>
+    </div>
+    <p class="email-success" id="email-success">You're in. See you on the mat.</p>
+  </div>
+  <footer>
+    <span class="back-link" onclick="showHome()">Home</span>
+    <div class="footer-name">follow your core</div>
+  </footer>
+</div>
+
+
 <script>
-  function showHome() { showView('home'); }
-  function showView(id) {
+  // ——— Navigation with browser back support ———
+  function showHome() {
+    showView('home', true);
+  }
+
+  function showView(id, replace) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (replace) {
+      history.replaceState({ view: id }, '', '');
+    } else {
+      history.pushState({ view: id }, '', '');
+    }
   }
-  function showPost(id) { showView(id); }
+
+  function goToPost(id) {
+    showView(id, false);
+  }
+
+  // Handle browser back/forward
+  window.addEventListener('popstate', (e) => {
+    const id = e.state && e.state.view ? e.state.view : 'home';
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Set initial history state
+  history.replaceState({ view: 'home' }, '', '');
+
+  // ——— Tap to highlight ———
   document.querySelectorAll('.ex-cues li').forEach(li => {
     li.addEventListener('click', () => {
       const wasActive = li.classList.contains('active');
@@ -441,6 +542,19 @@
       if (!wasActive) li.classList.add('active');
     });
   });
+
+  // ——— Email form ———
+  function submitEmail() {
+    const input = document.getElementById('email-input');
+    const success = document.getElementById('email-success');
+    if (input.value && input.value.includes('@')) {
+      input.style.display = 'none';
+      document.querySelector('.email-form button').style.display = 'none';
+      success.style.display = 'block';
+    } else {
+      input.style.border = '1.5px solid var(--terra)';
+    }
+  }
 </script>
 </body>
 </html>
