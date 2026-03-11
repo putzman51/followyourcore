@@ -6,7 +6,7 @@
 <title>Follow Your Core</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --mango: #F5A623;
@@ -14,10 +14,16 @@
     --mango-pale: #FEF7ED;
     --mango-deep: #D4891A;
     --terra: #C4714A;
+    --terra-light: #E8A88A;
     --cream: #FDFAF5;
     --stone: #9A8B7D;
+    --stone-light: #C4B8AC;
     --dark: #352A22;
     --text: #4A3D35;
+    --sage: #8BA88A;
+    --sage-pale: #EDF3EC;
+    --sage-deep: #5E7A5D;
+    --warm-white: #FFFDF9;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -27,19 +33,23 @@
     color: var(--text);
     font-weight: 300;
     line-height: 1.75;
-    max-width: 620px;
+    max-width: 640px;
     margin: 0 auto;
     padding: 0 28px;
+    -webkit-font-smoothing: antialiased;
   }
+
+  /* ——— HEADER ——— */
   header {
-    padding: 44px 0 30px;
+    padding: 40px 0 26px;
     border-bottom: 1px solid var(--mango-light);
-    margin-bottom: 52px;
+    margin-bottom: 48px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    animation: fadeDown 0.6s ease both;
   }
-  .logo { text-decoration: none; cursor: pointer; }
+  .logo { text-decoration: none; cursor: pointer; display: inline-block; }
   .logo-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.55rem;
@@ -48,6 +58,15 @@
     color: var(--mango-deep);
     display: block;
     letter-spacing: 0.03em;
+    transition: color 0.3s;
+  }
+  .logo:hover .logo-name { color: var(--terra); }
+  .logo-tagline {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone-light);
+    margin-top: 2px;
   }
   nav { display: flex; gap: 22px; padding-bottom: 2px; }
   nav a {
@@ -56,18 +75,46 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--stone);
-    transition: color 0.2s;
+    transition: color 0.25s;
     cursor: pointer;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--terra);
+    transition: width 0.3s ease;
   }
   nav a:hover { color: var(--terra); }
+  nav a:hover::after { width: 100%; }
 
   .view { display: none; }
-  .view.active { display: block; animation: fadeUp 0.4s ease both; }
+  .view.active { display: block; animation: fadeUp 0.45s ease both; }
 
   /* ——— HOME ——— */
-  .newest-post { margin-bottom: 60px; }
-  .post-date { font-size: 0.68rem; color: var(--stone); margin-bottom: 14px; }
-
+  .home-greeting {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--stone);
+    margin-bottom: 36px;
+    animation: fadeUp 0.5s 0.15s ease both;
+  }
+  .newest-post {
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s 0.25s ease both;
+  }
+  .post-date {
+    font-size: 0.62rem;
+    color: var(--stone);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
   .newest-post h1 {
     font-family: 'Source Serif 4', serif;
     font-size: clamp(2rem, 6.5vw, 2.6rem);
@@ -76,16 +123,33 @@
     line-height: 1.18;
     color: var(--mango-deep);
     text-transform: lowercase;
-    margin-bottom: 26px;
+    margin-bottom: 20px;
   }
+
+  /* Tags */
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .tag {
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+    line-height: 1;
+    font-weight: 400;
+  }
+  .tag-equipment { color: var(--sage-deep); border-color: var(--sage); background: var(--sage-pale); }
+  .tag-floor { color: var(--terra); border-color: var(--terra-light); background: #FDF0EA; }
+  .tag-level { color: var(--stone); border-color: var(--stone-light); background: #F5F1ED; }
+  .tag-focus { color: var(--mango-deep); border-color: var(--mango-light); background: var(--mango-pale); }
+  .tag-fusion { color: #7A6B8A; border-color: #C4B8D6; background: #F3EFF8; }
+
   .newest-post p {
     font-size: 0.92rem;
     color: var(--text);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     line-height: 1.85;
   }
-
-  /* GO button */
   .go-btn {
     display: inline-flex;
     align-items: center;
@@ -102,24 +166,33 @@
     text-transform: uppercase;
     cursor: pointer;
     border: none;
-    transition: background 0.2s, transform 0.15s;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
     -webkit-tap-highlight-color: transparent;
   }
-  .go-btn:hover { background: var(--mango-deep); transform: scale(1.06); }
+  .go-btn:hover { background: var(--mango-deep); transform: scale(1.08); box-shadow: 0 4px 20px rgba(245,166,35,0.25); }
+
+  .recent-heading {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone-light);
+    margin: 48px 0 16px;
+    animation: fadeUp 0.5s 0.35s ease both;
+  }
 
   /* ——— POST VIEW ——— */
-  .post-header { margin-bottom: 44px; }
+  .post-header { margin-bottom: 40px; }
   .post-header h1 {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2.2rem, 7vw, 2.9rem);
     font-weight: 300;
     line-height: 1.15;
     color: var(--dark);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
   .post-intro {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
+    font-size: 1.08rem;
     font-weight: 300;
     font-style: italic;
     color: var(--stone);
@@ -127,28 +200,188 @@
     border-left: 2px solid var(--mango);
     padding-left: 18px;
   }
-  .post-meta-small { font-size: 0.68rem; color: var(--stone); margin-bottom: 14px; }
+  .post-meta-small { font-size: 0.62rem; color: var(--stone); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
 
   .duration-row {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 36px 0 44px;
-    font-size: 0.65rem;
+    margin: 32px 0 40px;
+    font-size: 0.62rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--stone);
   }
   .duration-row::before, .duration-row::after { content: ''; flex: 1; height: 1px; background: var(--mango-light); }
 
+  /* Side label for circular flow */
+  .side-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--mango-deep);
+    margin: 36px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .side-label::after { content: ''; flex: 1; height: 1px; background: var(--mango-light); }
+  .side-label .side-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--mango-pale);
+    border: 1px solid var(--mango-light);
+    font-size: 0.7rem;
+  }
+
+  /* ——— PRACTICE MODE TOGGLE ——— */
+  .mode-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -10px 0 30px;
+    padding: 14px 20px;
+    background: var(--warm-white);
+    border: 1px solid var(--mango-light);
+    border-radius: 12px;
+  }
+  .mode-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .mode-label span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--terra);
+    margin-top: 2px;
+  }
+  .toggle {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    background: var(--stone-light);
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .toggle.on { background: var(--mango); }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+  .toggle.on::after { transform: translateX(22px); }
+
+  /* ——— EXERCISE INDEX (sticky) ——— */
+  .exercise-index {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--cream);
+    padding: 12px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--mango-light);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .exercise-index::-webkit-scrollbar { display: none; }
+  .index-track { display: flex; gap: 6px; min-width: max-content; }
+  .index-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid var(--mango-light);
+    background: var(--warm-white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    color: var(--stone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    flex-shrink: 0;
+  }
+  .index-dot:hover { border-color: var(--mango); color: var(--mango-deep); }
+  .index-dot.current { background: var(--mango); border-color: var(--mango-deep); color: white; }
+  .index-dot.done { background: var(--sage-pale); border-color: var(--sage); color: var(--sage-deep); }
+  .index-sep {
+    width: 1px;
+    background: var(--mango-light);
+    margin: 4px 4px;
+    flex-shrink: 0;
+  }
+
   /* ——— EXERCISES ——— */
-  .exercises { margin-bottom: 72px; }
-  .exercise { padding: 32px 0; border-bottom: 1px solid var(--mango-light); }
+  .exercises { margin-bottom: 60px; }
+  .exercise { padding: 28px 0; border-bottom: 1px solid var(--mango-light); transition: opacity 0.3s; }
   .exercise:first-child { border-top: 1px solid var(--mango-light); }
-  .ex-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; }
+  .ex-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
   .ex-num { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 300; color: var(--mango); min-width: 22px; }
-  .ex-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--dark); line-height: 1.2; }
-  .ex-time { margin-left: auto; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mango-deep); background: var(--mango-pale); border: 1px solid var(--mango-light); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .ex-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--dark); line-height: 1.2; }
+  .ex-time {
+    margin-left: auto;
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mango-deep);
+    background: var(--mango-pale);
+    border: 1px solid var(--mango-light);
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .ex-reps {
+    margin-left: auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--stone);
+    white-space: nowrap;
+  }
+  .ex-done-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 6px 14px;
+    border: 1px solid var(--mango-light);
+    border-radius: 20px;
+    background: var(--warm-white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    cursor: pointer;
+    transition: all 0.25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ex-done-btn:hover { border-color: var(--sage); color: var(--sage-deep); }
+  .ex-done-btn.checked { background: var(--sage-pale); border-color: var(--sage); color: var(--sage-deep); }
+  .ex-done-btn .check { font-size: 0.7rem; transition: transform 0.2s; }
+  .ex-done-btn.checked .check { transform: scale(1.2); }
+
   .ex-cues { list-style: none; display: flex; flex-direction: column; gap: 7px; padding-left: 36px; }
   .ex-cues li {
     font-size: 0.88rem;
@@ -158,7 +391,7 @@
     cursor: pointer;
     border-radius: 6px;
     padding: 3px 6px 3px 0;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
   }
@@ -182,95 +415,152 @@
     padding: 6px 12px 6px 14px !important;
     border-radius: 6px;
     font-style: normal !important;
+    transform: translateX(2px);
   }
   .ex-cues li.active::before { color: rgba(255,255,255,0.4); }
 
-  /* ——— EMAIL VIEW ——— */
-  .email-view { padding-bottom: 72px; }
-  .email-view h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 5vw, 2.2rem);
-    font-weight: 300;
-    color: var(--dark);
-    margin-bottom: 12px;
-  }
-  .email-view p {
-    font-size: 0.9rem;
-    color: var(--stone);
-    line-height: 1.8;
-    margin-bottom: 36px;
-  }
-  .email-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .email-form input {
-    width: 100%;
-    padding: 14px 18px;
-    border: 1.5px solid var(--mango-light);
-    border-radius: 40px;
-    background: white;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 300;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .email-form input:focus { border-color: var(--mango); }
-  .email-form input::placeholder { color: var(--stone); }
-  .email-form button {
-    align-self: flex-start;
-    background: var(--mango);
-    border: none;
-    padding: 13px 32px;
-    border-radius: 40px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: white;
-    cursor: pointer;
-    font-weight: 400;
-    transition: background 0.2s;
-  }
-  .email-form button:hover { background: var(--mango-deep); }
-  .email-success {
+  .practice-active .exercise.dimmed { opacity: 0.3; }
+  .practice-active .exercise.current-ex { opacity: 1; }
+
+  /* ——— PRACTICE CONTROLS (floating) ——— */
+  .practice-controls {
     display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    color: white;
+    border-radius: 40px;
+    padding: 10px 8px;
+    gap: 6px;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(53,42,34,0.3);
+    z-index: 100;
+    animation: slideUp 0.35s ease both;
+  }
+  .practice-controls.visible { display: flex; }
+  .pc-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pc-btn:hover { background: rgba(255,255,255,0.2); }
+  .pc-btn.main {
+    width: 48px;
+    height: 48px;
+    background: var(--mango);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+  }
+  .pc-btn.main:hover { background: var(--mango-deep); }
+  .pc-timer {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
-    font-style: italic;
-    color: var(--terra);
-    margin-top: 20px;
+    min-width: 50px;
+    text-align: center;
+    color: var(--mango-light);
+    font-variant-numeric: tabular-nums;
   }
 
+  /* ——— ARCHIVE ——— */
+  .archive-list { margin-bottom: 60px; }
+  .archive-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .filter-btn {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--mango-light);
+    background: var(--warm-white);
+    color: var(--stone);
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Jost', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .filter-btn:hover { border-color: var(--mango); color: var(--mango-deep); }
+  .filter-btn.active { background: var(--mango-pale); border-color: var(--mango); color: var(--mango-deep); }
+  .post-row {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 0 16px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--mango-light);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .post-row:first-of-type { border-top: 1px solid var(--mango-light); }
+  .post-row:hover { background: var(--mango-pale); margin: 0 -12px; padding: 18px 12px; border-radius: 8px; border-color: transparent; }
+  .post-row:hover + .post-row { border-top-color: transparent; }
+  .row-date { font-size: 0.62rem; color: var(--stone); padding-top: 3px; line-height: 1.5; }
+  .row-date span { display: block; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+  .row-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
+  .post-row:hover .row-title { color: var(--terra); }
+  .row-tags { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; padding-top: 2px; }
+  .row-tags .tag { font-size: 0.48rem; padding: 2px 8px; }
+
+  /* ——— EMAIL VIEW ——— */
+  .email-view { padding-bottom: 60px; }
+  .email-view h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 2.2rem); font-weight: 300; color: var(--dark); margin-bottom: 10px; }
+  .email-view p { font-size: 0.9rem; color: var(--stone); line-height: 1.8; margin-bottom: 32px; }
+  .email-perks { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+  .perk { display: flex; align-items: flex-start; gap: 12px; font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+  .perk-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--mango-pale); border: 1px solid var(--mango-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; margin-top: 1px; }
+  .email-form { display: flex; flex-direction: column; gap: 12px; }
+  .email-form input { width: 100%; padding: 14px 18px; border: 1.5px solid var(--mango-light); border-radius: 40px; background: white; font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--text); outline: none; transition: border-color 0.25s, box-shadow 0.25s; }
+  .email-form input:focus { border-color: var(--mango); box-shadow: 0 0 0 3px rgba(245,166,35,0.1); }
+  .email-form input::placeholder { color: var(--stone-light); }
+  .email-form button { align-self: flex-start; background: var(--mango); border: none; padding: 13px 32px; border-radius: 40px; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: white; cursor: pointer; font-weight: 400; transition: background 0.25s, box-shadow 0.25s; }
+  .email-form button:hover { background: var(--mango-deep); box-shadow: 0 4px 16px rgba(245,166,35,0.25); }
+  .email-success { display: none; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--terra); margin-top: 20px; }
+
+  /* ——— ABOUT ——— */
+  .about-body { font-size: 0.92rem; line-height: 1.85; color: var(--text); margin: 32px 0 48px; }
+  .about-body p { margin-bottom: 18px; }
+  .about-values { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px 0; }
+  .value-card { padding: 20px; background: var(--warm-white); border: 1px solid var(--mango-light); border-radius: 12px; text-align: center; }
+  .value-card .v-icon { font-size: 1.3rem; margin-bottom: 8px; display: block; }
+  .value-card .v-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: var(--dark); margin-bottom: 4px; }
+  .value-card .v-desc { font-size: 0.72rem; color: var(--stone); line-height: 1.5; }
+
   /* ——— FOOTER ——— */
-  footer { padding: 28px 0 52px; border-top: 1px solid var(--mango-light); display: flex; justify-content: space-between; align-items: center; }
-  .back-link { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone); display: flex; align-items: center; gap: 8px; transition: color 0.2s, gap 0.2s; cursor: pointer; }
+  footer { padding: 24px 0 48px; border-top: 1px solid var(--mango-light); display: flex; justify-content: space-between; align-items: center; }
+  .back-link { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone); display: flex; align-items: center; gap: 8px; transition: color 0.25s, gap 0.25s; cursor: pointer; }
   .back-link::before { content: '←'; font-size: 0.82rem; }
   .back-link:hover { color: var(--terra); gap: 12px; }
   .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--mango-deep); font-weight: 300; font-style: italic; }
   .footer-copy { font-size: 0.6rem; color: var(--mango-deep); letter-spacing: 0.1em; }
 
-  /* ——— ARCHIVE ——— */
-  .archive-list { margin-bottom: 72px; }
-  .post-row {
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 0 18px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--mango-light);
-    cursor: pointer;
+  /* ——— PRINT ——— */
+  @media print {
+    header, .mode-bar, .exercise-index, .practice-controls, .go-btn, .ex-done-btn, footer, .tags { display: none !important; }
+    body { max-width: 100%; padding: 0; font-size: 11pt; color: #000; }
+    .view { display: block !important; animation: none !important; }
+    .exercise { page-break-inside: avoid; border-color: #ccc; }
+    .ex-cues li.breath { background: #f5f5f5; border-color: #999; color: #333; }
+    .post-header h1 { font-size: 24pt; color: #000; }
   }
-  .post-row:first-of-type { border-top: 1px solid var(--mango-light); }
-  .post-row:hover .row-title { color: var(--terra); }
-  .row-date { font-size: 0.65rem; color: var(--stone); padding-top: 4px; line-height: 1.5; }
-  .row-date span { display: block; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
-  .row-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
 
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  header { animation: fadeUp 0.5s ease both; }
+  /* ——— ANIMATIONS ——— */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
 </style>
 </head>
 <body>
@@ -278,6 +568,7 @@
 <header>
   <a class="logo" onclick="showHome()">
     <span class="logo-name">follow your core</span>
+    <span class="logo-tagline">breath · movement · precision</span>
   </a>
   <nav>
     <a onclick="showView('archive')">Archive</a>
@@ -287,14 +578,45 @@
 </header>
 
 
+<!-- ════════════════════════════════════════════════ -->
 <!-- ════ HOME ════ -->
+<!-- ════════════════════════════════════════════════ -->
 <div id="view-home" class="view active">
+  <p class="home-greeting">Welcome. Take a breath before you begin.</p>
+
   <section class="newest-post">
-    <p class="post-date">March 4, 2026</p>
-    <h1>For the Love of Footwork</h1>
-    <p>Our feet are the foundation of the body. In Pilates, they get their own series. Let's create a positive relationship with our feet, with precision and control.</p>
-    <button class="go-btn" onclick="goToPost('footwork')">go</button>
+    <p class="post-date">March 11, 2026 · Latest</p>
+    <h1>circular mat flow</h1>
+    <div class="tags">
+      <span class="tag tag-floor">Mat</span>
+      <span class="tag tag-fusion">Pilates + Yoga</span>
+      <span class="tag tag-focus">Full Body</span>
+      <span class="tag tag-level">Intermediate</span>
+    </div>
+    <p>A fusion of mat Pilates exercises and Yoga poses flowing in an energetic circular pattern. If you have a circular mat, this is a perfect flow for it.</p>
+    <button class="go-btn" onclick="goToPost('circular-mat')">go</button>
   </section>
+
+  <p class="recent-heading">Earlier</p>
+
+  <div class="archive-list">
+    <div class="post-row" onclick="goToPost('footwork')">
+      <div class="row-date">Mar 6<span>2026</span></div>
+      <div class="row-title">For the Love of Footwork</div>
+      <div class="row-tags">
+        <span class="tag tag-equipment">Reformer</span>
+      </div>
+    </div>
+    <div class="post-row" onclick="goToPost('simple-floor')">
+      <div class="row-date">Mar 2<span>2026</span></div>
+      <div class="row-title">Simple Floor Routine</div>
+      <div class="row-tags">
+        <span class="tag tag-floor">Mat</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-name">follow your core</div>
     <div class="footer-copy">followyourcore.com</div>
@@ -302,29 +624,338 @@
 </div>
 
 
+<!-- ════════════════════════════════════════════════ -->
+<!-- ════ POST: CIRCULAR MAT FLOW ════ -->
+<!-- ════════════════════════════════════════════════ -->
+<div id="view-circular-mat" class="view">
+  <div class="post-header">
+    <p class="post-meta-small">March 11, 2026</p>
+    <h1>Circular Mat Flow</h1>
+    <div class="tags" style="margin: 12px 0 18px;">
+      <span class="tag tag-floor">Mat</span>
+      <span class="tag tag-fusion">Pilates + Yoga</span>
+      <span class="tag tag-focus">Full Body</span>
+      <span class="tag tag-level">Intermediate</span>
+    </div>
+    <p class="post-intro">A fusion of mat Pilates exercises and Yoga poses flowing in an energetic circular pattern. If you have a circular mat, this is a perfect flow for it. If you are working on a traditional rectangle mat, kneel facing the front of your mat, with plenty of space around you.</p>
+  </div>
+
+  <div class="duration-row">18 exercises · right side then left side</div>
+
+  <!-- Practice Mode -->
+  <div class="mode-bar">
+    <div class="mode-label">Practice Mode<span>Advance through cues one at a time</span></div>
+    <button class="toggle" id="toggle-circular-mat" onclick="togglePractice('circular-mat')"></button>
+  </div>
+
+  <!-- Exercise Index -->
+  <div class="exercise-index" id="index-circular-mat">
+    <div class="index-track">
+      <div class="index-dot" data-ex="0" onclick="scrollToEx('circular-mat',0)">1</div>
+      <div class="index-dot" data-ex="1" onclick="scrollToEx('circular-mat',1)">2</div>
+      <div class="index-dot" data-ex="2" onclick="scrollToEx('circular-mat',2)">3</div>
+      <div class="index-dot" data-ex="3" onclick="scrollToEx('circular-mat',3)">4</div>
+      <div class="index-dot" data-ex="4" onclick="scrollToEx('circular-mat',4)">5</div>
+      <div class="index-dot" data-ex="5" onclick="scrollToEx('circular-mat',5)">6</div>
+      <div class="index-dot" data-ex="6" onclick="scrollToEx('circular-mat',6)">7</div>
+      <div class="index-dot" data-ex="7" onclick="scrollToEx('circular-mat',7)">8</div>
+      <div class="index-dot" data-ex="8" onclick="scrollToEx('circular-mat',8)">9</div>
+      <div class="index-sep"></div>
+      <div class="index-dot" data-ex="9" onclick="scrollToEx('circular-mat',9)">10</div>
+      <div class="index-dot" data-ex="10" onclick="scrollToEx('circular-mat',10)">11</div>
+      <div class="index-dot" data-ex="11" onclick="scrollToEx('circular-mat',11)">12</div>
+      <div class="index-dot" data-ex="12" onclick="scrollToEx('circular-mat',12)">13</div>
+      <div class="index-dot" data-ex="13" onclick="scrollToEx('circular-mat',13)">14</div>
+      <div class="index-dot" data-ex="14" onclick="scrollToEx('circular-mat',14)">15</div>
+      <div class="index-dot" data-ex="15" onclick="scrollToEx('circular-mat',15)">16</div>
+      <div class="index-dot" data-ex="16" onclick="scrollToEx('circular-mat',16)">17</div>
+      <div class="index-dot" data-ex="17" onclick="scrollToEx('circular-mat',17)">18</div>
+    </div>
+  </div>
+
+  <section class="exercises" id="exercises-circular-mat">
+
+    <!-- ——— RIGHT SIDE ——— -->
+    <div class="side-label"><span class="side-icon">R</span> Right Side Flow</div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">01</span><span class="ex-title">Cat / Cow</span><span class="ex-reps">5×</span></div>
+      <ul class="ex-cues">
+        <li>All fours position. Place equal bodyweight on upper and lower body.</li>
+        <li class="breath">Inhale — arch your spine in a comfy backbend, especially your upper spine.</li>
+        <li class="breath">Exhale — round your spine like a cat, especially your lower spine to stretch lower spine muscles.</li>
+        <li>After the 5th Cat/Cow, roll up vertebra by vertebra until you are in high kneeling position.</li>
+        <li>Do all exercises on the right first — after, we will flow on the left side.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',0)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">02</span><span class="ex-title">Kneeling Side Plank to Gate Pose</span><span class="ex-reps">5×</span></div>
+      <ul class="ex-cues">
+        <li>From high kneeling, extend your right leg straight sideways to the right, arms in a "T" position.</li>
+        <li class="breath">Inhale — place left hand on the mat next to your left knee and reach your right hand up to the ceiling to do Kneeling Side Plank. Focus on deeply stretching your arms, chest, spine, right leg and hip.</li>
+        <li class="breath">Exhale — lift up to the start position to side bend your right arm toward your right leg, left arm reaching up toward the ceiling finding Gate Pose.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',1)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">03</span><span class="ex-title">Wild Thing</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>From Kneeling Side Plank, keep your left hand on the mat.</li>
+        <li>Transition into Wild Thing by bending your right leg with right foot in high relevé.</li>
+        <li>Extend your left leg straight to finish your foundation.</li>
+        <li>Push down into the mat to build your back bend; reaching your right arm and hand backward toward wheel and stretch.</li>
+        <li>Sit down gracefully.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',2)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">04</span><span class="ex-title">Pilates Twist</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Seated at the bottom of Wild Thing, keep your left hand on the mat and keep your right leg bent, foot flat.</li>
+        <li>Transition to Pilates Twist by placing your right arm straight on top of right knee, right palm facing up.</li>
+        <li>Bend your left leg and place your left ankle behind your right ankle to complete your foundation.</li>
+        <li>Right arm sweeps overhead sideways as you press your feet into the mat to straighten both legs into a full body arc shape.</li>
+        <li>Right arm reaches under your torso to initiate the spinal twist.</li>
+        <li>Hips in the air.</li>
+        <li>Reverse your way down to the seated position.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',3)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">05</span><span class="ex-title">Seated Spinal Twist</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Step your right foot over your left thigh.</li>
+        <li>Stretch your left arm up and over your right leg.</li>
+        <li>Hook your left elbow over your right thigh.</li>
+        <li>Twist your right arm behind your back. Look over your right shoulder.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',4)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">06</span><span class="ex-title">Lil Thing</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Internally rotate right leg and place your right knee next to your left foot in a "Z" legs position.</li>
+        <li>Left hand by left hip.</li>
+        <li>Lean forward onto your knees and side bend slightly to the left.</li>
+        <li>Right arm sweeps in an arc.</li>
+        <li>Reach right arm up toward the ceiling to stretch your hips and spine.</li>
+        <li>Reverse back to seated.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',5)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">07</span><span class="ex-title">Half Straddle Side Bend</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Keep left leg bent and externally rotated.</li>
+        <li>Externally rotate and straighten right leg.</li>
+        <li>Left foot on inside of right leg.</li>
+        <li>Slide your right arm toward your right foot and grab your foot or ankle.</li>
+        <li>Stretch your left arm up and over to deepen the side bend stretch.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',6)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">08</span><span class="ex-title">Full Straddle Stretch</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Open your legs to a full Straddle Stretch across your mat.</li>
+        <li>Reach your arms forward and stretch your legs and hips.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',7)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">09</span><span class="ex-title">Child's Pose</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Recenter yourself on your mat and rest in Child's Pose for 5 breath cycles.</li>
+        <li class="breath">Breathe slowly and fully. Let the body settle.</li>
+        <li>Roll up one vertebra at a time.</li>
+        <li>Return to High Kneeling position — back to the start.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',8)"><span class="check">○</span> Done</button>
+    </div>
+
+    <!-- ——— LEFT SIDE ——— -->
+    <div class="side-label"><span class="side-icon">L</span> Left Side Flow</div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">10</span><span class="ex-title">Kneeling Side Plank to Gate Pose</span><span class="ex-reps">5×</span></div>
+      <ul class="ex-cues">
+        <li>From high kneeling, extend your left leg straight sideways to the left, arms in a "T" position.</li>
+        <li class="breath">Inhale — place right hand on the mat next to your right knee and reach your left hand up to the ceiling to do Kneeling Side Plank. Focus on deeply stretching your arms, chest, spine, left leg and hip.</li>
+        <li class="breath">Exhale — lift up to the start position to side bend your left arm toward your left leg. Right arm reaches up toward the ceiling for Gate Pose.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',9)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">11</span><span class="ex-title">Wild Thing</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>From Kneeling Side Plank, keep your right hand on the mat.</li>
+        <li>Transition into Wild Thing by bending your left leg with left foot in high relevé.</li>
+        <li>Extend your right leg straight to finish your foundation.</li>
+        <li>Push down into the mat to build your back bend; reaching your left arm and hand backward toward wheel to stretch.</li>
+        <li>Sit down gracefully.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',10)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">12</span><span class="ex-title">Pilates Twist</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Seated at the bottom of Wild Thing, keep your right hand on the mat and keep your left leg bent, foot flat.</li>
+        <li>Transition to Pilates Twist by placing your left arm straight on top of left knee, left palm facing up.</li>
+        <li>Bend your right leg and place your right ankle behind your left ankle to complete your foundation.</li>
+        <li>Left arm sweeps overhead sideways as you press your feet into the mat to straighten both legs into a full body arc shape.</li>
+        <li>Left arm reaches under your torso to initiate the spinal twist.</li>
+        <li>Hips in the air.</li>
+        <li>Reverse your way down to the seated position.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',11)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">13</span><span class="ex-title">Seated Spinal Twist</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Step your left foot over your right thigh.</li>
+        <li>Stretch your right arm up and over your left leg.</li>
+        <li>Hook your right elbow over your left thigh.</li>
+        <li>Twist your left arm behind your back. Look over your left shoulder.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',12)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">14</span><span class="ex-title">Lil Thing</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Internally rotate left leg and place your left knee next to your right foot in a "Z" legs position.</li>
+        <li>Right hand by right hip.</li>
+        <li>Lean forward onto your knees and side bend slightly to the right.</li>
+        <li>Left arm sweeps in an arc.</li>
+        <li>Reach left arm up toward the ceiling to stretch your hips and spine.</li>
+        <li>Reverse back to seated.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',13)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">15</span><span class="ex-title">Half Straddle Side Bend</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Keep right leg bent and externally rotated.</li>
+        <li>Externally rotate and straighten left leg.</li>
+        <li>Right foot on inside of left leg.</li>
+        <li>Slide your left arm toward your left foot and grab your foot or ankle.</li>
+        <li>Stretch your right arm up and over to deepen the side bend stretch.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',14)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">16</span><span class="ex-title">Full Straddle Stretch</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Open your legs to a full Straddle Stretch across your mat.</li>
+        <li>Reach your arms forward and stretch your legs and hips.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',15)"><span class="check">○</span> Done</button>
+    </div>
+
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">17</span><span class="ex-title">Child's Pose</span><span class="ex-reps">1×</span></div>
+      <ul class="ex-cues">
+        <li>Recenter yourself on your mat and rest in Child's Pose for 5 breath cycles.</li>
+        <li class="breath">Breathe slowly and fully. Let the body settle.</li>
+        <li>Roll up one vertebra at a time.</li>
+        <li>Return to High Kneeling position — back to the start.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',16)"><span class="check">○</span> Done</button>
+    </div>
+
+    <!-- Closing note as an "exercise" for practice mode flow -->
+    <div class="exercise">
+      <div class="ex-header"><span class="ex-num">18</span><span class="ex-title">Repeat &amp; Enjoy</span></div>
+      <ul class="ex-cues">
+        <li>Practice this flow 3 or 4 times in a row as a warm up, or integrate it into a longer routine.</li>
+        <li class="breath">Each round will feel more fluid. Let the breath lead.</li>
+      </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'circular-mat',17)"><span class="check">○</span> Done</button>
+    </div>
+
+  </section>
+
+  <div style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--stone); line-height:1.85; margin-bottom:60px; border-left:2px solid var(--mango-light); padding-left:18px;">
+    Enjoy!
+  </div>
+
+  <footer>
+    <span class="back-link" onclick="showHome()">All Posts</span>
+    <div class="footer-name">follow your core</div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
 <!-- ════ POST: SIMPLE FLOOR ROUTINE ════ -->
+<!-- ════════════════════════════════════════════════ -->
 <div id="view-simple-floor" class="view">
   <div class="post-header">
     <p class="post-meta-small">March 2, 2026</p>
     <h1>Simple Floor Routine</h1>
+    <div class="tags" style="margin: 12px 0 18px;">
+      <span class="tag tag-floor">Mat</span>
+      <span class="tag tag-focus">Full Body</span>
+      <span class="tag tag-level">Beginner</span>
+    </div>
     <p class="post-intro">Put on a soft playlist and enjoy each movement thoroughly. Expand with each breath and savor each movement. Relax into the mat.</p>
   </div>
-  <div class="duration-row">14 exercises about 45 minutes</div>
-  <section class="exercises">
+  <div class="duration-row">14 exercises · about 45 minutes</div>
+
+  <div class="mode-bar">
+    <div class="mode-label">Practice Mode<span>Advance through cues one at a time</span></div>
+    <button class="toggle" id="toggle-simple-floor" onclick="togglePractice('simple-floor')"></button>
+  </div>
+
+  <div class="exercise-index" id="index-simple-floor">
+    <div class="index-track">
+      <div class="index-dot" data-ex="0" onclick="scrollToEx('simple-floor',0)">1</div>
+      <div class="index-dot" data-ex="1" onclick="scrollToEx('simple-floor',1)">2</div>
+      <div class="index-dot" data-ex="2" onclick="scrollToEx('simple-floor',2)">3</div>
+      <div class="index-dot" data-ex="3" onclick="scrollToEx('simple-floor',3)">4</div>
+      <div class="index-dot" data-ex="4" onclick="scrollToEx('simple-floor',4)">5</div>
+      <div class="index-dot" data-ex="5" onclick="scrollToEx('simple-floor',5)">6</div>
+      <div class="index-dot" data-ex="6" onclick="scrollToEx('simple-floor',6)">7</div>
+      <div class="index-dot" data-ex="7" onclick="scrollToEx('simple-floor',7)">8</div>
+      <div class="index-dot" data-ex="8" onclick="scrollToEx('simple-floor',8)">9</div>
+      <div class="index-dot" data-ex="9" onclick="scrollToEx('simple-floor',9)">10</div>
+      <div class="index-dot" data-ex="10" onclick="scrollToEx('simple-floor',10)">11</div>
+      <div class="index-dot" data-ex="11" onclick="scrollToEx('simple-floor',11)">12</div>
+      <div class="index-dot" data-ex="12" onclick="scrollToEx('simple-floor',12)">13</div>
+      <div class="index-dot" data-ex="13" onclick="scrollToEx('simple-floor',13)">14</div>
+    </div>
+  </div>
+
+  <section class="exercises" id="exercises-simple-floor">
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">01</span><span class="ex-title">Breathing and Centering</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">01</span><span class="ex-title">Breathing and Centering</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Lay on your back, knees bent, feet flat.</li>
         <li>Place fingers along the center of your abdominals.</li>
         <li>Use your fingers to help you find the center of your core.</li>
-        <li class="breath">Inhale - pull your center toward your spine as deeply as possible.</li>
-        <li class="breath">Exhale - pull your center toward your spine a little more.</li>
+        <li class="breath">Inhale — pull your center toward your spine as deeply as possible.</li>
+        <li class="breath">Exhale — pull your center toward your spine a little more.</li>
         <li>Repeat 10 times. Concentrate. Center yourself.</li>
         <li>Carry this breath technique through all the exercises.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',0)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">02</span><span class="ex-title">100 Breathing - Head Down</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">02</span><span class="ex-title">100 Breathing — Head Down</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Neutral spine. Belly flat. Feet down.</li>
         <li>Keep arms strong and glued to the sides of your shoulder blades.</li>
@@ -332,94 +963,104 @@
         <li>Vigorously pump straight arms while keeping spine, rib cage, and head still.</li>
         <li>Breathe rhythmically and consistently.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',1)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">03</span><span class="ex-title">100 Breathing - Shoulder Blades Up</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">03</span><span class="ex-title">100 Breathing — Shoulder Blades Up</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Collar bones square. Arms glued to sides of shoulder blades.</li>
         <li>Lift your shoulder blades off the mat. Arms straight and stretched tight, fingers together.</li>
         <li class="breath">Inhale for 5 sniffs. Exhale for 5 blows.</li>
-        <li>Pump your arms controlled and vigorous. Repeat 3-10 times.</li>
+        <li>Pump your arms controlled and vigorous. Repeat 3–10 times.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',2)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">04</span><span class="ex-title">Single Leg Stretch</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">04</span><span class="ex-title">Single Leg Stretch</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Stretch out long with straight legs. Curl head and chest up.</li>
         <li>Keep rib cage and pelvis stable.</li>
-        <li class="breath">Exhale - bend right leg and pull thigh into low belly. Lift left leg a few inches off the floor.</li>
-        <li class="breath">Inhale - bend left leg in, stretch right leg a few inches from the floor.</li>
+        <li class="breath">Exhale — bend right leg and pull thigh into low belly. Lift left leg a few inches off the floor.</li>
+        <li class="breath">Inhale — bend left leg in, stretch right leg a few inches from the floor.</li>
         <li>Breathe and switch legs at the same rate. Do 10 sets.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',3)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">05</span><span class="ex-title">Double Leg Stretch</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">05</span><span class="ex-title">Double Leg Stretch</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Stretch out long with straight legs. Curl head and chest up.</li>
-        <li class="breath">Inhale - lift both legs and reach both arms up toward the ceiling.</li>
-        <li class="breath">Exhale - bend legs and pull them into a little ball with your arms.</li>
-        <li>Keep head and chest curled up. Abdominals tight against spine. Repeat 6-10 times.</li>
+        <li class="breath">Inhale — lift both legs and reach both arms up toward the ceiling.</li>
+        <li class="breath">Exhale — bend legs and pull them into a little ball with your arms.</li>
+        <li>Keep head and chest curled up. Abdominals tight against spine. Repeat 6–10 times.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',4)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">06</span><span class="ex-title">Clam Shell</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">06</span><span class="ex-title">Clam Shell</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Lay on your side with bent legs stacked. Spine straight and long.</li>
         <li>Prop head up on elbow or forearm. Other hand on center of abdominals.</li>
-        <li class="breath">Inhale - pull abdominals in. Keep feet together at the toes.</li>
-        <li class="breath">Exhale - lift top leg off bottom leg and hold 3 seconds.</li>
-        <li>Repeat 10-20 times. Do the other side.</li>
+        <li class="breath">Inhale — pull abdominals in. Keep feet together at the toes.</li>
+        <li class="breath">Exhale — lift top leg off bottom leg and hold 3 seconds.</li>
+        <li>Repeat 10–20 times. Do the other side.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',5)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">07</span><span class="ex-title">Side Leg Kicks</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">07</span><span class="ex-title">Side Leg Kicks</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Lay on your side in a banana shape. Feet in Pilates V with bottom toes curled under.</li>
         <li>Kick top leg at hip height.</li>
         <li>10x Forward and Backward, 10x Up and Down, 5 Circles each direction.</li>
         <li>Repeat on other side.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',6)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">08</span><span class="ex-title">Roll Up</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">08</span><span class="ex-title">Roll Up</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Stretch out long with straight legs. Arms glued to sides of shoulder blades.</li>
-        <li class="breath">Inhale - reach arms overhead.</li>
-        <li class="breath">Exhale - sweep arms up and over like a rainbow. Keep collar bones square.</li>
+        <li class="breath">Inhale — reach arms overhead.</li>
+        <li class="breath">Exhale — sweep arms up and over like a rainbow. Keep collar bones square.</li>
         <li>Hover hands close to legs and sit up one vertebra at a time. Fold in half and reach past your feet.</li>
         <li>Pelvic curl to initiate rolling back to start. Repeat 10 times.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',7)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">09</span><span class="ex-title">Kneeling Plank Push-Ups</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">09</span><span class="ex-title">Kneeling Plank Push-Ups</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Kneel in all fours. Hands shoulder-width apart. One line from head to knees.</li>
         <li>Arms glued to the sides of shoulder blades. Collar bones square.</li>
-        <li class="breath">Inhale - bend elbows to 90 degrees.</li>
-        <li class="breath">Exhale - straighten arms.</li>
+        <li class="breath">Inhale — bend elbows to 90 degrees.</li>
+        <li class="breath">Exhale — straighten arms.</li>
         <li>Repeat 10 times.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',8)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">10</span><span class="ex-title">Forearm Plank</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">10</span><span class="ex-title">Forearm Plank</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>From all fours, come down to forearms.</li>
         <li>Move one leg at a time into plank, keeping head and spine stable.</li>
         <li class="breath">Use your breath to maintain a stable spine.</li>
-        <li>Do 10-15 controlled breath cycles.</li>
+        <li>Do 10–15 controlled breath cycles.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',9)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">11</span><span class="ex-title">Glute Bridges</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">11</span><span class="ex-title">Glute Bridges</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Lay on your back with legs bent, feet flat. Position feet so you can touch your fingers to your heels.</li>
         <li>Flatten your abdominals. Do a pelvic curl to lift pelvis as high as possible.</li>
         <li>Push feet into the floor. Lift glutes higher and hold 3 seconds. Return to start.</li>
-        <li>Repeat 10-15 times. Keep abdominals pulled inward to prevent the dreaded hamstring cramp.</li>
+        <li>Repeat 10–15 times. Keep abdominals pulled inward to prevent the dreaded hamstring cramp.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',10)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">12</span><span class="ex-title">Windshield Wipers</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">12</span><span class="ex-title">Windshield Wipers</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Lay on the floor with legs bent. Separate feet as wide as the mat.</li>
         <li>Open arms to a T shape, palms up.</li>
@@ -428,9 +1069,10 @@
         <li class="breath">Breathe and relax as you move.</li>
         <li>Do 5 or more sets.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',11)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">13</span><span class="ex-title">Runner's Lunge with Side Bend</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">13</span><span class="ex-title">Runner's Lunge with Side Bend</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>From all fours, step right foot forward into Runner's Lunge.</li>
         <li>Left leg long and extended back at the front hip joint.</li>
@@ -439,14 +1081,16 @@
         <li class="breath">Breathe long and slow.</li>
         <li>Do the other side.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',12)"><span class="check">○</span> Done</button>
     </div>
     <div class="exercise">
-      <div class="ex-header"><span class="ex-num">14</span><span class="ex-title">Butterfly Stretch</span><span class="ex-time">3-4 min</span></div>
+      <div class="ex-header"><span class="ex-num">14</span><span class="ex-title">Butterfly Stretch</span><span class="ex-time">3–4 min</span></div>
       <ul class="ex-cues">
         <li>Lay on the floor. Place the bottoms of your feet together.</li>
         <li>Open your knees to the side like butterfly wings.</li>
         <li class="breath">Breathe slowly and flow into a relaxed state.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'simple-floor',13)"><span class="check">○</span> Done</button>
     </div>
   </section>
   <footer>
@@ -456,24 +1100,36 @@
 </div>
 
 
+<!-- ════════════════════════════════════════════════ -->
 <!-- ════ POST: FOR THE LOVE OF FOOTWORK ════ -->
+<!-- ════════════════════════════════════════════════ -->
 <div id="view-footwork" class="view">
   <div class="post-header">
-    <p class="post-meta-small">March 4, 2026</p>
+    <p class="post-meta-small">March 6, 2026</p>
     <h1>For the Love of Footwork</h1>
+    <div class="tags" style="margin: 12px 0 18px;">
+      <span class="tag tag-equipment">Reformer</span>
+      <span class="tag tag-focus">Feet & Ankles</span>
+      <span class="tag tag-level">All Levels</span>
+    </div>
     <p class="post-intro">on the Pilates Reformer</p>
   </div>
 
-  <div class="ex-cues" style="padding-left:0; margin-bottom: 40px;">
-    <li style="list-style:none; font-size:0.92rem; line-height:1.85; color:var(--text); margin-bottom:14px;">Our feet are the foundation of the body. The curves along the bottom of our feet mirror the curves of our spine, some say we carry three spines: one along our back, and one beneath each foot.</li>
-    <li style="list-style:none; font-size:0.92rem; line-height:1.85; color:var(--text); margin-bottom:14px;">Much like the spine, we tend to ignore our feet until something hurts. But in Pilates, the feet are honored with their own series: Footwork. It tones and strengthens the feet so they can maintain control throughout class, and throughout life.</li>
-    <li style="list-style:none; font-size:0.92rem; line-height:1.85; color:var(--text); margin-bottom:14px;">The work of Footwork is precise. You press specific parts of your feet into the Foot Bar to create leverage for optimal skeletal stability on the carriage. The entire body is asked to participate. Done mindfully, Footwork produces a remarkable feeling of energy, alignment, and core strength.</li>
-    <li style="list-style:none; font-size:0.92rem; line-height:1.85; color:var(--text); font-style:italic; color:var(--stone);">Let's create a positive relationship with our feet, with precision and control.</li>
+  <div style="margin-bottom: 40px;">
+    <p style="font-size:0.92rem; line-height:1.85; color:var(--text); margin-bottom:14px;">Our feet are the foundation of the body. The curves along the bottom of our feet mirror the curves of our spine, some say we carry three spines: one along our back, and one beneath each foot.</p>
+    <p style="font-size:0.92rem; line-height:1.85; color:var(--text); margin-bottom:14px;">Much like the spine, we tend to ignore our feet until something hurts. But in Pilates, the feet are honored with their own series: Footwork. It tones and strengthens the feet so they can maintain control throughout class, and throughout life.</p>
+    <p style="font-size:0.92rem; line-height:1.85; color:var(--text); margin-bottom:14px;">The work of Footwork is precise. You press specific parts of your feet into the Foot Bar to create leverage for optimal skeletal stability on the carriage. The entire body is asked to participate. Done mindfully, Footwork produces a remarkable feeling of energy, alignment, and core strength.</p>
+    <p style="font-size:0.92rem; line-height:1.85; font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--stone);">Let's create a positive relationship with our feet, with precision and control.</p>
   </div>
 
   <div class="duration-row">The Set Up</div>
 
-  <section class="exercises">
+  <div class="mode-bar">
+    <div class="mode-label">Practice Mode<span>Follow along cue by cue</span></div>
+    <button class="toggle" id="toggle-footwork" onclick="togglePractice('footwork')"></button>
+  </div>
+
+  <section class="exercises" id="exercises-footwork">
     <div class="exercise">
       <ul class="ex-cues">
         <li>Lay onto the Reformer with your head balanced on the headrest, shoulders symmetrically placed against the shoulder blocks, spine centered on the carriage, arms resting along your sides.</li>
@@ -489,10 +1145,11 @@
         <li class="breath">Exhale, push your center deeper into the carriage and allow your shoulders to feel cozy on the shoulder blocks. Stretch all the way out.</li>
         <li>Keep going through all the foot positions this way, gracefully stretching and bending your legs in rhythm with your breath. 10 repetitions per foot position.</li>
       </ul>
+      <button class="ex-done-btn" onclick="toggleDone(this,'footwork',0)"><span class="check">○</span> Done</button>
     </div>
   </section>
 
-  <div style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--stone); line-height:1.85; margin-bottom:72px; border-left:2px solid var(--mango-light); padding-left:18px;">
+  <div style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--stone); line-height:1.85; margin-bottom:60px; border-left:2px solid var(--mango-light); padding-left:18px;">
     Anyone can do this. Even if you don't yet know the precise breathing and core techniques, you can begin the process of learning while safely practicing Footwork on the Reformer. Greater body awareness and core strength arrive one breath at a time.
   </div>
 
@@ -503,16 +1160,54 @@
 </div>
 
 
+<!-- Practice Controls (floating bar) -->
+<div class="practice-controls" id="practice-controls">
+  <button class="pc-btn" onclick="practicePrev()" title="Previous cue">‹</button>
+  <div class="pc-timer" id="pc-timer">0:00</div>
+  <button class="pc-btn main" onclick="practiceNext()" id="pc-next-btn" title="Next cue">next</button>
+  <button class="pc-btn" onclick="practiceNextEx()" title="Skip to next exercise">»</button>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
 <!-- ════ ARCHIVE ════ -->
+<!-- ════════════════════════════════════════════════ -->
 <div id="view-archive" class="view">
-  <div class="archive-list">
-    <div class="post-row" onclick="goToPost('footwork')">
+  <div class="post-header" style="margin-bottom:28px;">
+    <h1>Archive</h1>
+    <p class="post-intro" style="border:none; padding:0; font-size:0.95rem;">Every routine and reflection, all in one place.</p>
+  </div>
+
+  <div class="archive-filter">
+    <button class="filter-btn active" onclick="filterPosts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterPosts('mat', this)">Mat</button>
+    <button class="filter-btn" onclick="filterPosts('reformer', this)">Reformer</button>
+    <button class="filter-btn" onclick="filterPosts('fusion', this)">Fusion</button>
+    <button class="filter-btn" onclick="filterPosts('thought', this)">Thoughts</button>
+  </div>
+
+  <div class="archive-list" id="archive-list">
+    <div class="post-row" data-tags="mat fusion" onclick="goToPost('circular-mat')">
+      <div class="row-date">Mar 11<span>2026</span></div>
+      <div class="row-title">Circular Mat Flow</div>
+      <div class="row-tags">
+        <span class="tag tag-floor">Mat</span>
+        <span class="tag tag-fusion">Fusion</span>
+      </div>
+    </div>
+    <div class="post-row" data-tags="reformer" onclick="goToPost('footwork')">
       <div class="row-date">Mar 6<span>2026</span></div>
       <div class="row-title">For the Love of Footwork</div>
+      <div class="row-tags">
+        <span class="tag tag-equipment">Reformer</span>
+      </div>
     </div>
-    <div class="post-row" onclick="goToPost('simple-floor')">
+    <div class="post-row" data-tags="mat" onclick="goToPost('simple-floor')">
       <div class="row-date">Mar 2<span>2026</span></div>
       <div class="row-title">Simple Floor Routine</div>
+      <div class="row-tags">
+        <span class="tag tag-floor">Mat</span>
+      </div>
     </div>
   </div>
   <footer>
@@ -526,7 +1221,18 @@
 <div id="view-about" class="view">
   <div class="post-header">
     <h1>About</h1>
-    <p class="post-intro">New routine every weekend. New thoughts every Thursday.<br><br>Breath and movement are an essential part of life. Let's enjoy them together. Please use these ideas however you feel will benefit yourself and others.</p>
+    <p class="post-intro">Breath and movement are an essential part of life. Let's enjoy them together.</p>
+  </div>
+  <div class="about-body">
+    <p>New routine every weekend. New thoughts every Thursday.</p>
+    <p>These routines are written for teachers looking for fresh sequencing ideas, and for anyone who wants to move with more awareness. Use them however you feel will benefit yourself and others.</p>
+    <div class="about-values">
+      <div class="value-card"><span class="v-icon">◯</span><div class="v-title">Precision</div><div class="v-desc">Every cue is intentional</div></div>
+      <div class="value-card"><span class="v-icon">≋</span><div class="v-title">Breath</div><div class="v-desc">The rhythm that guides movement</div></div>
+      <div class="value-card"><span class="v-icon">↕</span><div class="v-title">Flow</div><div class="v-desc">One exercise into the next</div></div>
+      <div class="value-card"><span class="v-icon">⊕</span><div class="v-title">Center</div><div class="v-desc">Everything starts from the core</div></div>
+    </div>
+    <p>Whether you teach on a Reformer, a mat, or just want to move better in your life — this is for you.</p>
   </div>
   <footer>
     <span class="back-link" onclick="showHome()">Home</span>
@@ -540,6 +1246,11 @@
   <div class="email-view">
     <h1>Let's move together</h1>
     <p>You are the reason I keep writing. Signing up keeps you in my loop.</p>
+    <div class="email-perks">
+      <div class="perk"><div class="perk-icon">◯</div><div>New routines delivered to your inbox every weekend</div></div>
+      <div class="perk"><div class="perk-icon">✦</div><div>Thursday thoughts on movement, teaching, and the body</div></div>
+      <div class="perk"><div class="perk-icon">→</div><div>Occasional deep dives on specific exercises and techniques</div></div>
+    </div>
     <div class="email-form">
       <input type="email" id="email-input" placeholder="your@email.com">
       <button onclick="submitEmail()">Join</button>
@@ -554,47 +1265,190 @@
 
 
 <script>
-  // ——— Navigation with browser back support ———
-  function showHome() {
-    showView('home', true);
-  }
+  // ═══ STATE ═══
+  let practiceMode = { active: false, postId: null, exIdx: 0, cueIdx: -1 };
+  let timerInterval = null;
+  let timerSeconds = 0;
+  const doneState = {};
+
+  // ═══ NAVIGATION ═══
+  function showHome() { showView('home', true); exitPractice(); }
 
   function showView(id, replace) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById('view-' + id).classList.add('active');
+    const el = document.getElementById('view-' + id);
+    if (el) el.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (replace) {
-      history.replaceState({ view: id }, '', '');
-    } else {
-      history.pushState({ view: id }, '', '');
-    }
+    if (replace) history.replaceState({ view: id }, '', '');
+    else history.pushState({ view: id }, '', '');
   }
 
-  function goToPost(id) {
-    showView(id, false);
-  }
+  function goToPost(id) { exitPractice(); showView(id, false); }
 
-  // Handle browser back/forward
   window.addEventListener('popstate', (e) => {
+    exitPractice();
     const id = e.state && e.state.view ? e.state.view : 'home';
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById('view-' + id).classList.add('active');
+    const el = document.getElementById('view-' + id);
+    if (el) el.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Set initial history state
   history.replaceState({ view: 'home' }, '', '');
 
-  // ——— Tap to highlight ———
+  // ═══ TAP TO HIGHLIGHT ═══
   document.querySelectorAll('.ex-cues li').forEach(li => {
     li.addEventListener('click', () => {
+      if (practiceMode.active) return;
       const wasActive = li.classList.contains('active');
       li.closest('ul').querySelectorAll('li').forEach(el => el.classList.remove('active'));
       if (!wasActive) li.classList.add('active');
     });
   });
 
-  // ——— Email form ———
+  // ═══ DONE TRACKING ═══
+  function toggleDone(btn, postId, exIdx) {
+    const key = postId + '-' + exIdx;
+    doneState[key] = !doneState[key];
+    btn.classList.toggle('checked', doneState[key]);
+    btn.querySelector('.check').textContent = doneState[key] ? '●' : '○';
+    const indexEl = document.getElementById('index-' + postId);
+    if (indexEl) {
+      const dots = indexEl.querySelectorAll('.index-dot');
+      if (dots[exIdx]) dots[exIdx].classList.toggle('done', doneState[key]);
+    }
+  }
+
+  // ═══ EXERCISE INDEX ═══
+  function scrollToEx(postId, exIdx) {
+    const container = document.getElementById('exercises-' + postId);
+    if (!container) return;
+    const exercises = container.querySelectorAll('.exercise');
+    if (exercises[exIdx]) exercises[exIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ═══ PRACTICE MODE ═══
+  function togglePractice(postId) {
+    const toggle = document.getElementById('toggle-' + postId);
+    if (practiceMode.active && practiceMode.postId === postId) {
+      exitPractice();
+    } else {
+      exitPractice();
+      practiceMode = { active: true, postId: postId, exIdx: 0, cueIdx: -1 };
+      toggle.classList.add('on');
+      document.getElementById('practice-controls').classList.add('visible');
+      const container = document.getElementById('exercises-' + postId);
+      if (container) container.closest('.view').classList.add('practice-active');
+      startTimer();
+      practiceNext();
+    }
+  }
+
+  function exitPractice() {
+    if (!practiceMode.active) return;
+    practiceMode.active = false;
+    document.querySelectorAll('.toggle').forEach(t => t.classList.remove('on'));
+    document.getElementById('practice-controls').classList.remove('visible');
+    document.querySelectorAll('.practice-active').forEach(el => el.classList.remove('practice-active'));
+    document.querySelectorAll('.exercise').forEach(ex => ex.classList.remove('dimmed', 'current-ex'));
+    document.querySelectorAll('.ex-cues li.active').forEach(li => li.classList.remove('active'));
+    document.querySelectorAll('.index-dot.current').forEach(d => d.classList.remove('current'));
+    stopTimer();
+  }
+
+  function practiceNext() {
+    if (!practiceMode.active) return;
+    const container = document.getElementById('exercises-' + practiceMode.postId);
+    if (!container) return;
+    const exercises = container.querySelectorAll('.exercise');
+    const currentEx = exercises[practiceMode.exIdx];
+    if (!currentEx) return;
+    const cues = currentEx.querySelectorAll('.ex-cues li');
+    practiceMode.cueIdx++;
+    if (practiceMode.cueIdx >= cues.length) {
+      practiceMode.exIdx++;
+      practiceMode.cueIdx = 0;
+      if (practiceMode.exIdx >= exercises.length) {
+        document.getElementById('pc-next-btn').textContent = '✓';
+        setTimeout(() => exitPractice(), 1200);
+        return;
+      }
+    }
+    updatePracticeHighlight();
+  }
+
+  function practicePrev() {
+    if (!practiceMode.active) return;
+    practiceMode.cueIdx--;
+    if (practiceMode.cueIdx < 0) {
+      if (practiceMode.exIdx > 0) {
+        practiceMode.exIdx--;
+        const container = document.getElementById('exercises-' + practiceMode.postId);
+        const exercises = container.querySelectorAll('.exercise');
+        const cues = exercises[practiceMode.exIdx].querySelectorAll('.ex-cues li');
+        practiceMode.cueIdx = cues.length - 1;
+      } else {
+        practiceMode.cueIdx = 0;
+      }
+    }
+    updatePracticeHighlight();
+  }
+
+  function practiceNextEx() {
+    if (!practiceMode.active) return;
+    const container = document.getElementById('exercises-' + practiceMode.postId);
+    const exercises = container.querySelectorAll('.exercise');
+    practiceMode.exIdx++;
+    practiceMode.cueIdx = 0;
+    if (practiceMode.exIdx >= exercises.length) { exitPractice(); return; }
+    updatePracticeHighlight();
+  }
+
+  function updatePracticeHighlight() {
+    const container = document.getElementById('exercises-' + practiceMode.postId);
+    if (!container) return;
+    const exercises = container.querySelectorAll('.exercise');
+    exercises.forEach((ex, i) => {
+      ex.classList.toggle('dimmed', i !== practiceMode.exIdx);
+      ex.classList.toggle('current-ex', i === practiceMode.exIdx);
+      ex.querySelectorAll('.ex-cues li').forEach(li => li.classList.remove('active'));
+    });
+    const currentEx = exercises[practiceMode.exIdx];
+    if (currentEx) {
+      const cues = currentEx.querySelectorAll('.ex-cues li');
+      if (cues[practiceMode.cueIdx]) {
+        cues[practiceMode.cueIdx].classList.add('active');
+        cues[practiceMode.cueIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    const indexEl = document.getElementById('index-' + practiceMode.postId);
+    if (indexEl) {
+      indexEl.querySelectorAll('.index-dot').forEach((dot, i) => dot.classList.toggle('current', i === practiceMode.exIdx));
+      const currentDot = indexEl.querySelectorAll('.index-dot')[practiceMode.exIdx];
+      if (currentDot) currentDot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
+
+  // ═══ TIMER ═══
+  function startTimer() { timerSeconds = 0; updateTimerDisplay(); timerInterval = setInterval(() => { timerSeconds++; updateTimerDisplay(); }, 1000); }
+  function stopTimer() { clearInterval(timerInterval); timerSeconds = 0; updateTimerDisplay(); }
+  function updateTimerDisplay() {
+    const m = Math.floor(timerSeconds / 60);
+    const s = timerSeconds % 60;
+    document.getElementById('pc-timer').textContent = m + ':' + String(s).padStart(2, '0');
+  }
+
+  // ═══ ARCHIVE FILTER ═══
+  function filterPosts(tag, btn) {
+    document.querySelectorAll('.archive-filter .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#archive-list .post-row').forEach(row => {
+      if (tag === 'all') { row.style.display = ''; return; }
+      row.style.display = row.dataset.tags.includes(tag) ? '' : 'none';
+    });
+  }
+
+  // ═══ EMAIL FORM ═══
   function submitEmail() {
     const input = document.getElementById('email-input');
     const success = document.getElementById('email-success');
@@ -606,6 +1460,15 @@
       input.style.border = '1.5px solid var(--terra)';
     }
   }
+
+  // ═══ KEYBOARD SUPPORT ═══
+  document.addEventListener('keydown', (e) => {
+    if (!practiceMode.active) return;
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); practiceNext(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); practicePrev(); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); practiceNextEx(); }
+    if (e.key === 'Escape') { exitPractice(); }
+  });
 </script>
 </body>
 </html>
