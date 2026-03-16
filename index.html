@@ -142,6 +142,7 @@
   .tag-floor { color: var(--terra); border-color: var(--terra-light); background: #FDF0EA; }
   .tag-level { color: var(--stone); border-color: var(--stone-light); background: #F5F1ED; }
   .tag-focus { color: var(--mango-deep); border-color: var(--mango-light); background: var(--mango-pale); }
+  .tag-thought { color: #6B5E8A; border-color: #C4BBD6; background: #F3F0F7; }
   .tag-fusion { color: #7A6B8A; border-color: #C4B8D6; background: #F3EFF8; }
 
   .newest-post p {
@@ -201,6 +202,25 @@
     padding-left: 18px;
   }
   .post-meta-small { font-size: 0.62rem; color: var(--stone); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+
+  .post-body-text { font-size: 0.92rem; line-height: 1.85; color: var(--text); margin-bottom: 14px; }
+  .essay-body { margin-bottom: 60px; }
+  .essay-body p {
+    font-size: 0.92rem; line-height: 1.9; color: var(--text); margin-bottom: 20px;
+  }
+  .essay-body p:first-child::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem; font-weight: 400; float: left;
+    line-height: 0.8; margin: 6px 8px 0 0;
+    color: var(--mango-deep);
+  }
+  .essay-body .callout {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 400; font-style: italic;
+    color: var(--terra); line-height: 1.7;
+    border-left: 2px solid var(--mango);
+    padding: 12px 0 12px 20px; margin: 28px 0;
+  }
 
   .duration-row {
     display: flex;
@@ -585,21 +605,28 @@
   <p class="home-greeting">Welcome. Take a breath before you begin.</p>
 
   <section class="newest-post">
-    <p class="post-date">March 11, 2026 · Latest</p>
-    <h1>circular mat flow</h1>
+    <p class="post-date">March 13, 2026 · Latest</p>
+    <h1>what is stability in pilates practice?</h1>
     <div class="tags">
-      <span class="tag tag-floor">Mat</span>
-      <span class="tag tag-fusion">Pilates + Yoga</span>
-      <span class="tag tag-focus">Full Body</span>
-      <span class="tag tag-level">Intermediate</span>
+      <span class="tag tag-thought">Thursday Thought</span>
+      <span class="tag tag-focus">Core</span>
+      <span class="tag tag-level">All Levels</span>
     </div>
-    <p>A fusion of mat Pilates exercises and Yoga poses flowing in an energetic circular pattern. If you have a circular mat, this is a perfect flow for it.</p>
-    <button class="go-btn" onclick="goToPost('circular-mat')">go</button>
+    <p>Crunches and sit ups are great, but not everybody is well suited for these targeted core exercises. Pilates to the rescue — stability is a major practice point.</p>
+    <button class="go-btn" onclick="goToPost('stability')">go</button>
   </section>
 
   <p class="recent-heading">Earlier</p>
 
   <div class="archive-list">
+    <div class="post-row" onclick="goToPost('circular-mat')">
+      <div class="row-date">Mar 11<span>2026</span></div>
+      <div class="row-title">Circular Mat Flow</div>
+      <div class="row-tags">
+        <span class="tag tag-floor">Mat</span>
+        <span class="tag tag-focus">Pilates + Yoga</span>
+      </div>
+    </div>
     <div class="post-row" onclick="goToPost('footwork')">
       <div class="row-date">Mar 6<span>2026</span></div>
       <div class="row-title">For the Love of Footwork</div>
@@ -620,6 +647,45 @@
   <footer>
     <div class="footer-name">follow your core</div>
     <div class="footer-copy">followyourcore.com</div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- ════ POST: WHAT IS STABILITY ════ -->
+<!-- ════════════════════════════════════════════════ -->
+<div id="view-stability" class="view">
+  <div class="post-header">
+    <p class="post-meta-small">March 13, 2026 · Thursday Thought</p>
+    <h1>What is Stability in Pilates Practice?</h1>
+    <div class="tags" style="margin:12px 0 18px;">
+      <span class="tag tag-thought">Thursday Thought</span>
+      <span class="tag tag-focus">Core</span>
+      <span class="tag tag-level">All Levels</span>
+    </div>
+  </div>
+
+  <div class="essay-body">
+    <p>Crunches and Sit Ups are great, but not everybody is well suited for these targeted core exercises. If spine, shoulder or hip issues are present in your body, traditional abdominal exercises don't make sense. If there are energy issues or deconditioned abdominal muscles, a sit up or crunch isn't the right exercise.</p>
+
+    <p>Pilates to the rescue! The Reformer and Trapeze Table (Cadillac) are both designed to work the abdominals simply by pressing your body into the machine and keeping it stable while moving either the arms, legs, or both. In Pilates we call this technique Stability.</p>
+
+    <div class="callout">Stability is a major practice point. In most Pilates exercises core work is produced by keeping the spine — or sections of the spine — stable while arms and or legs move in patterns designed to make keeping the spine stable, very challenging.</div>
+
+    <p>On the Mat, Reformer Carriage, Trapeze Table, and Chair top we use touchpoint feedback to stabilize the body and learn what stability feels like.</p>
+
+    <p>It is an elegant way to work. It looks and feels graceful. From a novice perspective, the stillness of a skilled Pilates practitioner is well hidden. Holding the skeleton still with deep, core muscles kind of looks like "not moving". But the work needed to perform stability well will make every muscle in your body quiver. We call it "earthquakes" — the feeling that your abdominals are vibrating while stabilizing during a Pilates exercise; it means you're doing it right.</p>
+
+    <p>For example, to set up Supine Arms on the Reformer, every bone in your torso is placed on the Reformer Carriage with care. Breathing is controlled to maintain perfect skeletal alignment. The Reformer provides the structure for your skeleton, but your abdominals are in charge of keeping your spine and shoulders absolutely still on the Carriage as your arms move in big sweeping repetitions attached to the ropes and pullies. During repetitions, your focus circulates around every touchpoint between your body and The Reformer, maintaining consistent pressure everywhere your body touches down. Earthquake City.</p>
+
+    <p>Every Pilates exercise uses Stability to create deeply engaged core work. When practicing Roll Up on the Mat, stabilize your heels, calves and glutes into the mat as you roll through your entire spine head to tailbone. During Rollover on the Mat, your head, shoulders and arms remain glued to the mat, stabilized, while the legs and entire spine move with the strength of the abdominals.</p>
+
+    <p>Understanding which points of the body are supposed to move, and which parts are meant to stabilize during each Pilates exercise will simplify your progress and speed the results of your work in the Pilates studio.</p>
+  </div>
+
+  <footer>
+    <span class="back-link" onclick="showHome()">All Posts</span>
+    <div class="footer-name">follow your core</div>
   </footer>
 </div>
 
@@ -1187,12 +1253,19 @@
   </div>
 
   <div class="archive-list" id="archive-list">
+    <div class="post-row" data-tags="thought" onclick="goToPost('stability')">
+      <div class="row-date">Mar 13<span>2026</span></div>
+      <div class="row-title">What is Stability in Pilates Practice?</div>
+      <div class="row-tags">
+        <span class="tag tag-thought">Thought</span>
+      </div>
+    </div>
     <div class="post-row" data-tags="mat fusion" onclick="goToPost('circular-mat')">
       <div class="row-date">Mar 11<span>2026</span></div>
       <div class="row-title">Circular Mat Flow</div>
       <div class="row-tags">
         <span class="tag tag-floor">Mat</span>
-        <span class="tag tag-fusion">Fusion</span>
+        <span class="tag tag-focus">Pilates + Yoga</span>
       </div>
     </div>
     <div class="post-row" data-tags="reformer" onclick="goToPost('footwork')">
