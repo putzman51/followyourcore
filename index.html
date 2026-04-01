@@ -605,20 +605,28 @@
   <p class="home-greeting">Welcome. Take a breath before you begin.</p>
 
   <section class="newest-post">
-    <p class="post-date">March 15, 2026 · Latest</p>
-    <h1>what is stability in pilates practice?</h1>
+    <p class="post-date">March 20, 2026 · Latest</p>
+    <h1>the new powerhouse</h1>
     <div class="tags">
       <span class="tag tag-thought">Thursday Thought</span>
+      <span class="tag tag-focus">Shoulders</span>
       <span class="tag tag-focus">Core</span>
       <span class="tag tag-level">All Levels</span>
     </div>
-    <p>Crunches and sit ups are great, but not everybody is well suited for these targeted core exercises. Pilates to the rescue — stability is a major practice point.</p>
-    <button class="go-btn" onclick="goToPost('stability')">go</button>
+    <p>Pilates taught that the Powerhouse is glutes, abdominals and lower spine muscles. But there is a 4th area of the body we need to include.</p>
+    <button class="go-btn" onclick="goToPost('powerhouse')">go</button>
   </section>
 
   <p class="recent-heading">Earlier</p>
 
   <div class="archive-list">
+    <div class="post-row" onclick="goToPost('stability')">
+      <div class="row-date">Mar 13<span>2026</span></div>
+      <div class="row-title">What is Stability in Pilates Practice?</div>
+      <div class="row-tags">
+        <span class="tag tag-thought">Thought</span>
+      </div>
+    </div>
     <div class="post-row" onclick="goToPost('circular-mat')">
       <div class="row-date">Mar 11<span>2026</span></div>
       <div class="row-title">Circular Mat Flow</div>
@@ -652,11 +660,47 @@
 
 
 <!-- ════════════════════════════════════════════════ -->
+<!-- ════ POST: THE NEW POWERHOUSE ════ -->
+<!-- ════════════════════════════════════════════════ -->
+<div id="view-powerhouse" class="view">
+  <div class="post-header">
+    <p class="post-meta-small">March 20, 2026 · Thursday Thought</p>
+    <h1>The New Powerhouse</h1>
+    <div class="tags" style="margin:12px 0 18px;">
+      <span class="tag tag-thought">Thursday Thought</span>
+      <span class="tag tag-focus">Shoulders</span>
+      <span class="tag tag-focus">Core</span>
+      <span class="tag tag-level">All Levels</span>
+    </div>
+  </div>
+
+  <div class="essay-body">
+    <p>Pilates taught that the Powerhouse is a combination of 3 strong muscular areas: the glutes, abdominals and lower spine muscles. He taught that we must engage the Powerhouse consistently through all exercises. Pilates would famously cue "Engage the Powerhouse!" when teaching his students. Glutes, abdominals and lower spine muscles do a wonderful job stabilizing the pelvis and ribcage but…</p>
+
+    <p>There is a 4th area of the body we need to include in our Powerhouse located on the back of our upper arms where our arms meet the side of our shoulder blades. Each shoulder blade has a divot where the head of the arm bone fits. The muscles here are called The Rotator Cuffs. Every Pilates exercise requires the ability to maintain stability where the upper arm bone attaches to the sides of the shoulder blades using the rotator cuff muscles.</p>
+
+    <div class="callout">Maintaining this alignment is challenging. The upper arm bones easily move out of alignment with the shoulder blades. As soon as that happens the shoulders are no longer stable. Without shoulder stability the core muscles of the upper body will not engage properly and performing a Pilates exercise correctly isn't possible.</div>
+
+    <p>Mindful effort is used to maintain arm/shoulder alignment. In Pilates we refer to this effort as the principles of Precision and Control. The pace of the exercises are determined by the effort needed to stabilize the alignment of the skeleton.</p>
+
+    <p>The beauty of this work is from all the effort comes an effortlessly graceful posture. Exercising with proper arm/shoulder alignment and stable shoulder joints trains a youthful, athletic posture even if you aren't young or athletic (you can look and feel like you are!).</p>
+
+    <p>I think we need to include the muscles of the rotator cuff when we "Engage the Powerhouse". You can try it now. Use your imagination to slowly pull your upper arm bones backward a little. At the same time think about squeezing an orange in each arm pit. The sensation will be a firmness on the side of your shoulder blades and the back of your upper arms. The intensity should be about a 5 out of 10. Try to maintain the firm feeling while making arm circles (and every other Pilates exercise you practice in the future).</p>
+  </div>
+
+  <footer>
+    <span class="back-link" onclick="showHome()">All Posts</span>
+    <div class="footer-name">follow your core</div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════════════ -->
 <!-- ════ POST: WHAT IS STABILITY ════ -->
 <!-- ════════════════════════════════════════════════ -->
 <div id="view-stability" class="view">
   <div class="post-header">
-    <p class="post-meta-small">March 15, 2026 · Thursday Thought</p>
+    <p class="post-meta-small">March 13, 2026 · Thursday Thought</p>
     <h1>What is Stability in Pilates Practice?</h1>
     <div class="tags" style="margin:12px 0 18px;">
       <span class="tag tag-thought">Thursday Thought</span>
@@ -1253,8 +1297,15 @@
   </div>
 
   <div class="archive-list" id="archive-list">
+    <div class="post-row" data-tags="thought" onclick="goToPost('powerhouse')">
+      <div class="row-date">Mar 20<span>2026</span></div>
+      <div class="row-title">The New Powerhouse</div>
+      <div class="row-tags">
+        <span class="tag tag-thought">Thought</span>
+      </div>
+    </div>
     <div class="post-row" data-tags="thought" onclick="goToPost('stability')">
-      <div class="row-date">Mar 15<span>2026</span></div>
+      <div class="row-date">Mar 13<span>2026</span></div>
       <div class="row-title">What is Stability in Pilates Practice?</div>
       <div class="row-tags">
         <span class="tag tag-thought">Thought</span>
